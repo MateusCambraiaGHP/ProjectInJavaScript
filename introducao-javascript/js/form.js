@@ -2,7 +2,7 @@ const botaoEnviar = document.querySelector("#adicionar-paciente");
 
 botaoEnviar.addEventListener("click", function (event) {
     event.preventDefault();
-    
+
 
     let form = document.querySelector("#formform");
     let paciente = obtemDadosPaciente(form);
@@ -14,10 +14,8 @@ botaoEnviar.addEventListener("click", function (event) {
         return;
     }
 
-    let tabela = montaTr(paciente);
-
-    let tabelaPacientes = document.querySelector("#tabela-pacientes");
-    tabelaPacientes.appendChild(tabela);
+    adicionaPacienteNaTabela(paciente);
+    
 });
 
 
@@ -38,7 +36,7 @@ function validaPaciente(paciente) {
     let pesoValido = validaPeso(paciente.peso);
     let nomePaciente = paciente.nome;
 
-   
+
     if (nomePaciente.length == 0) {
         erros.push("INSIRA UM NOME.");
     }
@@ -69,6 +67,7 @@ function montaTr(paciente) {
     pacienteTr.appendChild(imcTd);
 
     return pacienteTr;
+
 }
 
 function montaTd(dado, classe) {
@@ -87,4 +86,9 @@ function exibeMensagensDeErro(erros) {
         Li.classList.add("mensagem-de-erro");
         ulErro.appendChild(Li);
     });
+}
+function adicionaPacienteNaTabela(paciente){
+    let tabela = montaTr(paciente);
+    let tabelaPacientes = document.querySelector("#tabela-pacientes");
+    tabelaPacientes.appendChild(tabela);
 }
